@@ -24,29 +24,28 @@
   <img id="dailyImage" src="" alt="Daily Image">
 
   <script>
-    // ✅ Add your Imgur links here
+    // ✅ Add more Imgur links here as you upload them
     const images = [
-      'https://i.imgur.com/0XgGTRU.jpeg'  // <– Your current image
-      // Add more as needed
+      'https://i.imgur.com/0XgGTRU.jpeg'
+      // Add more image links below like:
+      // 'https://i.imgur.com/abc123.jpg',
     ];
 
-    // 🕥 Daily rotation starts from this base date
-    const startDate = new Date('2025-08-01T22:30:00-07:00'); // 10:30 PM PST
+    // 🕥 Base date for rotation at 10:30 PM PST
+    const startDate = new Date('2025-08-01T22:30:00-07:00');
 
-    // ⏱ Get time now
+    // ⏱ Get local time now
     const now = new Date();
 
-    // 🧮 Calculate number of full 24hr periods (after 10:30pm PST)
-    const timeDiff = now - startDate;
+    // 📆 Days since first scheduled 10:30 PM
     const msPerDay = 1000 * 60 * 60 * 24;
-    const daysElapsed = Math.floor(timeDiff / msPerDay);
+    const elapsedDays = Math.floor((now - startDate) / msPerDay);
 
-    // 🔁 Prevent repeating until all have been shown
-    const imageIndex = Math.min(daysElapsed, images.length - 1);
-    const selectedImage = images[imageIndex];
+    // 🧠 Prevent repeat until all shown
+    const index = Math.min(elapsedDays, images.length - 1);
 
-    // 🖼️ Display the image
-    document.getElementById('dailyImage').src = selectedImage;
+    // 🖼️ Show today’s image
+    document.getElementById('dailyImage').src = images[index];
   </script>
 </body>
 </html>
