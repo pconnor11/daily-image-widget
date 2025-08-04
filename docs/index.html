@@ -4,24 +4,49 @@
   <meta charset="UTF-8">
   <title>Daily Image Widget</title>
   <style>
-    body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    img { max-width: 100%; max-height: 100vh; object-fit: contain; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
   <img id="dailyImage" src="" alt="Daily Image">
+
   <script>
+    // ✅ Add your Imgur links here
     const images = [
-      'images/photo1.jpg',
-      'images/photo2.jpg',
-      'images/photo3.jpg',
-      'images/photo4.jpg'
-      // add more as needed
+      'https://i.imgur.com/nZPOfD5.jpeg'  // <– Your current image
+      // Add more as needed
     ];
-    const today = new Date();
-    const index = today.getFullYear() * 365 + today.getMonth() * 31 + today.getDate(); // crude but good enough
-    const imageIndex = index % images.length;
-    document.getElementById('dailyImage').src = images[imageIndex];
+
+    // 🕥 Daily rotation starts from this base date
+    const startDate = new Date('2025-08-01T22:30:00-07:00'); // 10:30 PM PST
+
+    // ⏱ Get time now
+    const now = new Date();
+
+    // 🧮 Calculate number of full 24hr periods (after 10:30pm PST)
+    const timeDiff = now - startDate;
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysElapsed = Math.floor(timeDiff / msPerDay);
+
+    // 🔁 Prevent repeating until all have been shown
+    const imageIndex = Math.min(daysElapsed, images.length - 1);
+    const selectedImage = images[imageIndex];
+
+    // 🖼️ Display the image
+    document.getElementById('dailyImage').src = selectedImage;
   </script>
 </body>
 </html>
