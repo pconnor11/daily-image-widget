@@ -24,30 +24,30 @@
   <img id="dailyImage" src="" alt="Daily Image">
 
   <script>
-    // 🔧 Replace with your own images
+    // 📸 Replace with your actual .jpeg file names
     const images = [
-      'images/photo1.jpg',
-      'images/photo2.jpg',
-      'images/photo3.jpg',
-      'images/photo4.jpg',
-      'images/photo5.jpg'
+      'images/photo1.jpeg',
+      'images/photo2.jpeg',
+      'images/photo3.jpeg',
+      'images/photo4.jpeg',
+      'images/photo5.jpeg'
     ];
 
-    // 🕛 Set your campaign start date (day to start rotation)
-    const startDate = new Date('2025-08-01T00:00:00'); // Local midnight
+    // 🕛 Set your start date
+    const startDate = new Date('2025-08-01T00:00:00');
 
-    // 📆 Truncate current time to midnight
+    // 📆 Get today's date at local midnight
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    // 🧮 Calculate days since start
+    // 🧮 Calculate days passed since start
     const msPerDay = 1000 * 60 * 60 * 24;
     const daysElapsed = Math.floor((today - startDate) / msPerDay);
 
-    // 🔁 LOOPING: Wrap around if days > image count
-    const imageIndex = daysElapsed % images.length;
+    // 🧠 Prevent going past the last image
+    const imageIndex = Math.min(daysElapsed, images.length - 1);
 
-    // 🖼️ Display today's image
+    // 🖼️ Set image
     document.getElementById('dailyImage').src = images[imageIndex];
   </script>
 </body>
