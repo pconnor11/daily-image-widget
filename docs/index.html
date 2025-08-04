@@ -1,1 +1,27 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Image Widget</title>
+  <style>
+    body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    img { max-width: 100%; max-height: 100vh; object-fit: contain; }
+  </style>
+</head>
+<body>
+  <img id="dailyImage" src="" alt="Daily Image">
+  <script>
+    const images = [
+      'images/photo1.jpg',
+      'images/photo2.jpg',
+      'images/photo3.jpg',
+      'images/photo4.jpg'
+      // add more as needed
+    ];
+    const today = new Date();
+    const index = today.getFullYear() * 365 + today.getMonth() * 31 + today.getDate(); // crude but good enough
+    const imageIndex = index % images.length;
+    document.getElementById('dailyImage').src = images[imageIndex];
+  </script>
+</body>
+</html>
