@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Image Widget</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <img id="dailyImage" src="" alt="Daily Image">
 
+  <script>
+    // 🔧 Replace with your own images
+    const images = [
+      'images/photo1.jpg',
+      'images/photo2.jpg',
+      'images/photo3.jpg',
+      'images/photo4.jpg',
+      'images/photo5.jpg'
+    ];
+
+    // 🕛 Set your campaign start date (day to start rotation)
+    const startDate = new Date('2025-08-01T00:00:00'); // Local midnight
+
+    // 📆 Truncate current time to midnight
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // 🧮 Calculate days since start
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysElapsed = Math.floor((today - startDate) / msPerDay);
+
+    // 🔁 LOOPING: Wrap around if days > image count
+    const imageIndex = daysElapsed % images.length;
+
+    // 🖼️ Display today's image
+    document.getElementById('dailyImage').src = images[imageIndex];
+  </script>
+</body>
+</html>
